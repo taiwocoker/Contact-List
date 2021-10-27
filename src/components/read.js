@@ -60,11 +60,11 @@ export default function Read() {
                 <Table.Cell>{data.last_name}</Table.Cell>
                 <Table.Cell>{data.email}</Table.Cell>
                 <Table.Cell>{data.phone_number}</Table.Cell>
-                {/* <Link to='/update'>
+                <Link to={`/update/${data.id}`}>
                   <Table.Cell>
-                    <Button onClick={() => setData(data)}>Update</Button>
+                    <Button>Update</Button>
                   </Table.Cell>
-                </Link> */}
+                </Link>
                 <Table.Cell>
                   <Button onClick={() => onDelete(data.id)}>Delete</Button>
                 </Table.Cell>
@@ -73,6 +73,7 @@ export default function Read() {
           })}
         </Table.Body>
       </Table>
+      <Link to="/create"><button>Add Contact</button></Link>
     </div>
   )
 }

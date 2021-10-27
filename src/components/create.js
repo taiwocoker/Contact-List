@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
+import Alert from './alert'
 
 export default function Create() {
   let history = useHistory()
@@ -9,21 +10,34 @@ export default function Create() {
   const [last_name, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [phone_number, setPhoneNumber] = useState('')
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
+
+  const showAlert = (show = false, type = '', msg = '') => {
+    setAlert({ show, type, msg })
+  }
+
   const postData = () => {
-    axios
-      .post(`https://contacts-apitest.herokuapp.com/api/v1/contacts`, {
-        first_name,
-        last_name,
-        email,
-        phone_number,
-      })
-      .then(() => {
-        history.push('/')
-      })
+    if (first_name && last_name && email && phone_number) {
+      axios
+        .post(`https://contacts-apitest.herokuapp.com/api/v1/contacts`, {
+          first_name,
+          last_name,
+          email,
+          phone_number,
+        })
+        .then(() => {
+         showAlert(true,'success','Contact successfully created')
+          history.push('/')
+        })
+    }else {
+  
+     showAlert(true,'danger','please enter value')
+    }
   }
   return (
     <div>
       <Form className='create-form'>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Form.Field>
           <label>First Name</label>
           <input

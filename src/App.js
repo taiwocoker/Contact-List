@@ -17,7 +17,7 @@ function App() {
           <Route exact path='/' component={Read} />
         </div>
 
-        <Route path='/update' component={Update} />
+        <Route path='/update/:id' component={Update} />
       </div>
     </Router>
   )
