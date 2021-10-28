@@ -1,9 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Alert from './alert'
+
 
 export default function Read() {
   const [APIData, setAPIData] = useState([])
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
+
+  const showAlert = (show = false, type = '', msg = '') => {
+    setAlert({ show, type, msg })
+  }
+
   useEffect(() => {
     axios
       .get(`https://contacts-apitest.herokuapp.com/api/v1/contacts`)
@@ -26,12 +34,16 @@ export default function Read() {
     axios
       .delete(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`)
       .then(() => {
+        prompt('Do you want to delete this contact?')
         getData()
+        showAlert(true, 'success', 'contact successfully deleted')
       })
   }
 
   return (
     <div className='container table-responsive-sm'>
+      {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+
       <table class='table'>
         <thead>
           <tr>
