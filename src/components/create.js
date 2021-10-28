@@ -105,41 +105,6 @@ export default function Create() {
           </button>
         </div>
       </form>
-      {/* <Form className='create-form'>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
-        <Form.Field>
-          <label>First Name</label>
-          <input
-            placeholder='First Name'
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Last Name</label>
-          <input
-            placeholder='Last Name'
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Email</label>
-          <input
-            placeholder='Email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Phone Number</label>
-          <input
-            placeholder='Phone Number'
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </Form.Field>
-
-        <Button onClick={postData} type='submit'>
-          Add
-        </Button>
-      </Form> */}
     </div>
   )
 }

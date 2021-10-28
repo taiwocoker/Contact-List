@@ -12,8 +12,7 @@ export default function Read() {
         setAPIData(response.data)
       })
   }, [])
-   console.log(APIData)
-  
+  console.log(APIData)
 
   const getData = () => {
     axios
@@ -70,39 +69,7 @@ export default function Read() {
           })}
         </tbody>
       </table>
-      {/* <Table singleLine>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>First Name</Table.HeaderCell>
-            <Table.HeaderCell>Last Name</Table.HeaderCell>
-            <Table.HeaderCell>Email</Table.HeaderCell>
-            <Table.HeaderCell>Phone Number</Table.HeaderCell>
-            <Table.HeaderCell>Update</Table.HeaderCell>
-            <Table.HeaderCell>Delete</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
 
-        <Table.Body>
-          {APIData.map((data, i) => {
-            return (
-              <Table.Row key={i}>
-                <Table.Cell>{data.first_name}</Table.Cell>
-                <Table.Cell>{data.last_name}</Table.Cell>
-                <Table.Cell>{data.email}</Table.Cell>
-                <Table.Cell>{data.phone_number}</Table.Cell>
-                <Link to={`/update/${data.id}`}>
-                  <Table.Cell>
-                    <Button>Update</Button>
-                  </Table.Cell>
-                </Link>
-                <Table.Cell>
-                  <Button onClick={() => onDelete(data.id)}>Delete</Button>
-                </Table.Cell>
-              </Table.Row>
-            )
-          })}
-        </Table.Body>
-      </Table> */}
       <Link to='/create'>
         <button className='btn btn-primary add'>Add Contact</button>
       </Link>
