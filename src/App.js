@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 function App() {
   return (
     <Router>
-      <div className='main'>
+      <div className=''>
         <h2 className='main-header'>Contact List</h2>
         <div>
           <Route exact path='/create' component={Create} />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form } from 'semantic-ui-react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
 import Alert from './alert'
@@ -48,8 +47,68 @@ const showAlert = (show = false, type = '', msg = '') => {
    }
   }
   return (
-    <div>
-      <Form className='create-form'>
+    <div className='container'>
+      <form>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        <div className='row'>
+          <div className='col col-sm-12 mb-3'>
+            <label className='form-label'>First Name</label>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='First Name'
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col col-sm-12 mb-3'>
+            <label className='form-label'>Last Name</label>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Last Name'
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col col-sm-12 mb-3'>
+            <label className='form-label'>Email</label>
+            <input
+              type='email'
+              className='form-control'
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col col-sm-12 mb-3'>
+            <label className='form-label'>Phone Number</label>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Phone Number'
+              value={phone_number}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className='butto'>
+          <button
+            type='submit'
+            onClick={updateAPIData}
+            className='btn btn-primary'
+          >
+            Update
+          </button>
+        </div>
+      </form>
+      {/* <Form className='create-form'>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <Form.Field>
           <label>First Name</label>
@@ -87,7 +146,7 @@ const showAlert = (show = false, type = '', msg = '') => {
         <Button type='submit' onClick={updateAPIData}>
           Update
         </Button>
-      </Form>
+      </Form> */}
     </div>
   )
 }
