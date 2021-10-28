@@ -1,6 +1,6 @@
 # Contact List
 
-An App where you can view and add first name, last name, email and phone number to a list.
+An App where you can view, add, edit and delete first name, last name, email and phone number in a list.
 
 # List of contact
 ![screenshot](./capture.PNG)
