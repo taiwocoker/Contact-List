@@ -20,15 +20,16 @@ export default function Update(props) {
     axios
       .get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`)
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setFirstName(response.data.first_name)
         setLastName(response.data.last_name)
         setEmail(response.data.email)
         setPhoneNumber(response.data.phone_number)
       })
-  }, [])
+  }, [props.match.params])
 
-  const updateAPIData = () => {
+  const updateAPIData = (e) => {
+    e.preventDefault()
     const { id } = props.match.params
     if (first_name && last_name && email && phone_number) {
       axios
@@ -48,7 +49,7 @@ export default function Update(props) {
   }
   return (
     <div className='container'>
-      <form>
+      <form onSubmit={updateAPIData}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <div className='row'>
           <div className='col col-sm-12 mb-3'>
@@ -101,7 +102,7 @@ export default function Update(props) {
         <div className='butto'>
           <button
             type='submit'
-            onClick={updateAPIData}
+            
             className='btn btn-primary'
           >
             Update

@@ -44,14 +44,15 @@ export default function Read() {
     <div className='container table-responsive-sm'>
       {alert.show && <Alert {...alert} removeAlert={showAlert} />}
 
-      <table class='table'>
+      <table className='table'>
         <thead>
           <tr>
             <th scope='col'>First Name</th>
             <th scope='col'>Last Name</th>
             <th scope='col'>Email</th>
             <th scope='col'>Phone Number</th>
-            <th scope='col'>Update</th>
+            <th scope='col'>Edit</th>
+            <th scope='col'>History</th>
             <th scope='col'>Delete</th>
           </tr>
         </thead>
@@ -65,7 +66,12 @@ export default function Read() {
                 <td>{data.phone_number}</td>
                 <td>
                   <Link to={`/update/${data.id}`}>
-                    <button className='table-btn'>Update</button>
+                    <button className='table-btn'>Edit</button>
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/history/${data.id}`}>
+                    <button className='table-btn'>History</button>
                   </Link>
                 </td>
                 <td>
