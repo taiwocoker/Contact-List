@@ -20,6 +20,7 @@ POST
 
 GET
 - /contacts - (fetch all contacts)
+- /contacts/:id/versions(fetch history of edits of a contact)
 
 PUT
 - /contacts/:id - (Update a contact)
