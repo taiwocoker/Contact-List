@@ -3,7 +3,7 @@ import * as types from '../actions/actionTypes';
 const initialState = {
   loading: true,
   contacts: [],
-  history: {},
+  history: [],
   contact: {},
   error: {}
 };

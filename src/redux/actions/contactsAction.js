@@ -94,7 +94,7 @@ import { toast } from 'react-toastify';
   export const getHistory = (id) => async(dispatch) => {
     console.log("hello")
     try{
-      const res = await axios.get(`http://localhost:3001/api/v1/contacts/${id}/versions`);
+      const res = await axios.get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}/versions`);
       console.log(res.data)
   
       dispatch({

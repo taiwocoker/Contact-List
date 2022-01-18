@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { setContacts, deleteContact} from '../redux/actions/contactsAction';
 import Alert from './alert'
 import { connect } from 'react-redux';
+import Spinner from './layout/Spinner';
 
 
 const Read = ({setContacts, deleteContact, history, contact: { contacts, loading }}) => {
@@ -22,7 +23,8 @@ const Read = ({setContacts, deleteContact, history, contact: { contacts, loading
 
   
 
-  return (
+  return loading ? <Spinner /> : (
+    <>
     <div className='container table-responsive-sm'>
       {alert.show && <Alert {...alert} removeAlert={showAlert} />}
 
@@ -74,6 +76,7 @@ const Read = ({setContacts, deleteContact, history, contact: { contacts, loading
         <button className='btn btn-primary add'>Add Contact</button>
       </Link>
     </div>
+    </>
   )
 }
 

@@ -23,8 +23,8 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
   }, [id]);
 
   const version = []
-  const versionHistory = (history) => {
-    const versions = history.map((version) => version.object )
+  const versionHistory = (history = []) => {
+    const versions = history && history?.map((version) => version.object )
     for(let i = 0; i < versions.length; i++){
       let ver = versions[i].replace(/\n/gi, ' ').split(' ');
       version[i] = {
@@ -61,8 +61,10 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
           </tr>
         </thead>
         <tbody>
-          {versionHistory(history).map((data, i) => {
+          
+          {versionHistory(history).length === 0 ? <h1>No history</h1> : versionHistory(history).map((data, i) => {
             return (
+              
               <tr key={i}>
                 <td>{data.first_name}</td>
                 <td>{data.last_name}</td>
