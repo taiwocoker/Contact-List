@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { getHistory} from '../redux/actions/contactsAction';
-// import Alert from './alert'
 import { connect } from 'react-redux';
 
 
 const History = ({match, getHistory, histor: {history, loading}}) => {
-    console.log(history)
   const { id } = match.params;
     
   
-//   const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
-
-//   const showAlert = (show = false, type = '', msg = '') => {
-//     setAlert({ show, type, msg })
-//   }
 
   
   useEffect(() => {
-      console.log(id)
   getHistory(id);
   }, [id]);
 
@@ -36,8 +28,6 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
       }
     }
     return version;
-    console.log(version)
-    console.log(versions)
   }
   
 
@@ -47,7 +37,6 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
     <h1>Loading</h1> : 
     
     <div className='container table-responsive-sm'>
-      {/* {alert.show && <Alert {...alert} removeAlert={showAlert} />} */}
 
       <table className='table'>
         <thead>

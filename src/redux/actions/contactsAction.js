@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
   export const setContacts = () => async(dispatch) => {
     try{
       const res = await axios.get('https://contacts-apitest.herokuapp.com/api/v1/contacts');
-      console.log(res.data)
   
       dispatch({
         type: types.SET_CONTACTS,
@@ -23,7 +22,6 @@ import { toast } from 'react-toastify';
   export const getContact = (id) => async(dispatch) => {
     try{
       const res = await axios.get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`);
-      console.log(res.data)
       dispatch({
         type: types.GET_CONTACT,
         payload: res.data
@@ -79,7 +77,6 @@ import { toast } from 'react-toastify';
         }
       }
       const res = await axios.put(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`,formData, config);
-      console.log(res)
       dispatch({
         type: types.UPDATE_CONTACT,
         payload: { id, contact: res.data}
@@ -92,10 +89,8 @@ import { toast } from 'react-toastify';
   };
   
   export const getHistory = (id) => async(dispatch) => {
-    console.log("hello")
     try{
       const res = await axios.get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}/versions`);
-      console.log(res.data)
   
       dispatch({
         type: types.GET_HISTORY,

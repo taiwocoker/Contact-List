@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Alert from './alert'
 import { connect } from 'react-redux';
-import { useParams } from "react-router-dom";
 import { updateContact  } from '../redux/actions/contactsAction';
 
 const Update = ({match, updateContact, history, contact: {contacts, loading}}) => {
 
-  // const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
 
   const [ formData, setFormData ] = useState({
     first_name: '',
@@ -19,16 +16,11 @@ const Update = ({match, updateContact, history, contact: {contacts, loading}}) =
   
   const {first_name, last_name, email, phone_number} = formData
   
-  console.log(contacts)
   
-  // const showAlert = (show = false, type = '', msg = '') => {
-    //   setAlert({ show, type, msg })
-    // }
+  
     const { id } = match.params;
     const [ contact ] = contacts.filter(contact => contact.id === parseInt(id))
-    console.log(contact)
     useEffect(() => {
-      // getContact(id)
       setFormData({
         first_name: loading || !contact.first_name ? '' : contact.first_name,
         last_name: loading || !contact.last_name ? '' : contact.last_name,
@@ -36,7 +28,6 @@ const Update = ({match, updateContact, history, contact: {contacts, loading}}) =
         phone_number: loading || !contact.phone_number ? '' : contact.phone_number,
       })
       
-      console.log(id)
     }, [])
     
    const handleInputChange = (event) => {
