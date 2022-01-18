@@ -1,6 +1,8 @@
 const initialState = {
-    Loading: false,
-    Contacts: [],
+    loading: true,
+    contacts: [],
+    history: null,
+    contact: {}
   };
   
   export default initialState;

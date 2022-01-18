@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import Contacts from '../reducers/contactsReducer';
-import Loading from '../reducers/loadingReducer';
+import alert from './alert';
 
 export default combineReducers({
-     Contacts, Loading, 
+     Contacts, alert
   });

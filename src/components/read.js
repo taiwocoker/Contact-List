@@ -1,44 +1,26 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import { setContacts, deleteContact} from '../redux/actions/contactsAction';
 import Alert from './alert'
+import { connect } from 'react-redux';
 
 
-export default function Read() {
-  const [APIData, setAPIData] = useState([])
+const Read = ({setContacts, deleteContact, history, contact: { contacts, loading }}) => {
+  
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
 
   const showAlert = (show = false, type = '', msg = '') => {
     setAlert({ show, type, msg })
   }
 
+ 
   useEffect(() => {
-    axios
-      .get(`https://contacts-apitest.herokuapp.com/api/v1/contacts`)
-      .then((response) => {
-        console.log(response.data)
-        setAPIData(response.data)
-      })
-  }, [])
-  console.log(APIData)
+    setContacts();
+  }, [setContacts]);
+  console.log(contacts)
 
-  const getData = () => {
-    axios
-      .get(`https://contacts-apitest.herokuapp.com/api/v1/contacts`)
-      .then((getData) => {
-        setAPIData(getData.data)
-      })
-  }
 
-  const onDelete = (id) => {
-    axios
-      .delete(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`)
-      .then(() => {
-        prompt('Do you want to delete this contact?')
-        getData()
-        showAlert(true, 'success', 'contact successfully deleted')
-      })
-  }
+  
 
   return (
     <div className='container table-responsive-sm'>
@@ -57,7 +39,7 @@ export default function Read() {
           </tr>
         </thead>
         <tbody>
-          {APIData.map((data, i) => {
+          {contacts.map((data, i) => {
             return (
               <tr key={i}>
                 <td>{data.first_name}</td>
@@ -76,7 +58,7 @@ export default function Read() {
                 </td>
                 <td>
                   <button
-                    onClick={() => onDelete(data.id)}
+                    onClick={() => deleteContact(data.id)}
                     className='table-btn red'
                   >
                     Delete
@@ -94,3 +76,10 @@ export default function Read() {
     </div>
   )
 }
+
+
+const mapStateToProps = state => ({
+  contact: state.Contacts,
+})
+
+export default connect(mapStateToProps, { setContacts, deleteContact})(Read);

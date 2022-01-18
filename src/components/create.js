@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-import { useHistory } from 'react-router'
+import { connect } from 'react-redux';
+import { addContact } from '../redux/actions/contactsAction';
 import Alert from './alert'
 
-export default function Create() {
-  let history = useHistory()
+const AddContact = ({addContact, history}) => {
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -18,19 +17,14 @@ export default function Create() {
   const postData = (e) => {
     e.preventDefault()
     if (first_name && last_name && email && phone_number) {
-      axios
-        .post(`https://contacts-apitest.herokuapp.com/api/v1/contacts`, {
-          first_name,
-          last_name,
-          email,
-          phone_number,
-        })
-        .then(() => {
-          history.push('/')
-          showAlert(true, 'success', 'Contact successfully created')
-        })
-    } else {
-      showAlert(true, 'danger', 'please enter value')
+      addContact({
+        first_name,
+        last_name,
+        email,
+        phone_number
+      }, history)
+    }else{
+      console.log("error")
     }
   }
   return (
@@ -108,3 +102,5 @@ export default function Create() {
     </div>
   )
 }
+
+export default connect(null, { addContact })(AddContact)

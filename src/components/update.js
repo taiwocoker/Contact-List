@@ -1,56 +1,70 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useHistory } from 'react-router'
 import Alert from './alert'
+import { connect } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { updateContact  } from '../redux/actions/contactsAction';
 
-export default function Update(props) {
-  let history = useHistory()
-  const [first_name, setFirstName] = useState('')
-  const [last_name, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone_number, setPhoneNumber] = useState('')
-  const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
+const Update = ({match, updateContact, history, contact: {contacts, loading}}) => {
 
-  const showAlert = (show = false, type = '', msg = '') => {
-    setAlert({ show, type, msg })
-  }
+  // const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
 
-  useEffect(() => {
-    const { id } = props.match.params
-    axios
-      .get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`)
-      .then((response) => {
-        // console.log(response.data)
-        setFirstName(response.data.first_name)
-        setLastName(response.data.last_name)
-        setEmail(response.data.email)
-        setPhoneNumber(response.data.phone_number)
+  const [ formData, setFormData ] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+
+  })
+
+  
+  const {first_name, last_name, email, phone_number} = formData
+  
+  console.log(contacts)
+  
+  // const showAlert = (show = false, type = '', msg = '') => {
+    //   setAlert({ show, type, msg })
+    // }
+    const { id } = match.params;
+    const [ contact ] = contacts.filter(contact => contact.id === parseInt(id))
+    console.log(contact)
+    useEffect(() => {
+      // getContact(id)
+      setFormData({
+        first_name: loading || !contact.first_name ? '' : contact.first_name,
+        last_name: loading || !contact.last_name ? '' : contact.last_name,
+        email: loading || !contact.email ? '' : contact.email,
+        phone_number: loading || !contact.phone_number ? '' : contact.phone_number,
       })
-  }, [props.match.params])
+      
+      console.log(id)
+    }, [])
+    
+   const handleInputChange = (event) => {
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
 
-  const updateAPIData = (e) => {
-    e.preventDefault()
-    const { id } = props.match.params
-    if (first_name && last_name && email && phone_number) {
-      axios
-        .put(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`, {
-          first_name,
-          last_name,
-          email,
-          phone_number,
-        })
-        .then(() => {
-          showAlert(true, 'success', 'Contact successfully updated')
-          history.push('/')
-        })
-    } else {
-      showAlert(true, 'danger', 'please enter value')
-    }
+      formData[name] = value;
+
+      setFormData({
+          ...formData,
+          formData: formData
+
+      });
   }
+
+
+    const onSubmit = (e) => {
+      e.preventDefault()
+      // setFormData({...formData, [e.target.name]: e.target.value});
+
+      updateContact(id,formData, history)
+  }
+
   return (
     <div className='container'>
-      <form onSubmit={updateAPIData}>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+      <form onSubmit={e => onSubmit(e)}>
+        {/* {alert.show && <Alert {...alert} removeAlert={showAlert} />} */}
         <div className='row'>
           <div className='col col-sm-12 mb-3'>
             <label className='form-label'>First Name</label>
@@ -58,8 +72,9 @@ export default function Update(props) {
               type='text'
               className='form-control'
               placeholder='First Name'
+              name='first_name'
               value={first_name}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -70,8 +85,10 @@ export default function Update(props) {
               type='text'
               className='form-control'
               placeholder='Last Name'
+              name='last_name'
               value={last_name}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={handleInputChange}
+              // onChange={e => onchange(e)}
             />
           </div>
         </div>
@@ -82,8 +99,10 @@ export default function Update(props) {
               type='email'
               className='form-control'
               placeholder='Email'
+              name='email'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleInputChange}
+              // onChange={e => onchange(e)}
             />
           </div>
         </div>
@@ -94,8 +113,10 @@ export default function Update(props) {
               type='text'
               className='form-control'
               placeholder='Phone Number'
+              name='phone_number'
               value={phone_number}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              onChange={handleInputChange}
+              // onChange={e => onchange(e)}
             />
           </div>
         </div>
@@ -112,3 +133,8 @@ export default function Update(props) {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  contact: state.Contacts,
+})
+export default connect(mapStateToProps, { updateContact})(Update);
