@@ -59,7 +59,7 @@ import { toast } from 'react-toastify';
   export const deleteContact = (id) => async(dispatch) => {
     try{
       await axios.delete(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`);
-      // prompt('Do you want to delete this contact?')
+      prompt('Do you want to delete this contact?')
       dispatch({
         type: types.DELETE_CONTACT,
         payload: id,
@@ -85,6 +85,7 @@ import { toast } from 'react-toastify';
         payload: { id, contact: res.data}
       })
       history.push('/')
+      dispatch(setAlert('Contact Updated successfully', 'success'))
     } catch (error) {
       toast.error(`Whoops!, ${error.message} occured`);
     }
