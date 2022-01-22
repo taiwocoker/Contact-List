@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { setContacts, deleteContact} from '../redux/actions/contactsAction';
 import { connect } from 'react-redux';
 import Spinner from './layout/Spinner';
 
 
-const Read = ({setContacts, deleteContact, history, contact: { contacts, loading }}) => {
+const Read = ({setContacts, deleteContact, contact: { contacts, loading }}) => {
   
-  const [alert, setAlert] = useState({ show: false, msg: '', type: '' })
-
-  const showAlert = (show = false, type = '', msg = '') => {
-    setAlert({ show, type, msg })
-  }
+  
 
  
   useEffect(() => {
@@ -21,7 +17,7 @@ const Read = ({setContacts, deleteContact, history, contact: { contacts, loading
 
   
 
-  return loading ? <Spinner /> : (
+  return loading ? <Spinner/> : (
     <>
     <div className='container table-responsive-sm'>
 

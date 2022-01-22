@@ -3,7 +3,7 @@
 An App where you can view, add, edit and delete first name, last name, email and phone number in a list and also get history of edit.
 
 # List of contact
-![screenshot](./capture.PNG)
+![screenshot](./capture2.PNG)
 
 # Create page
 ![screenshot](./capture1.PNG)

@@ -12,7 +12,7 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
   
   useEffect(() => {
   getHistory(id);
-  }, [id]);
+  }, [id,getHistory]);
 
   const version = []
   const versionHistory = (history = []) => {
@@ -34,7 +34,7 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
   return (
    <>
     {loading ?
-    <h1>Loading</h1> : 
+    <h6>Loading...</h6> : 
     
     <div className='container table-responsive-sm'>
 
@@ -51,7 +51,7 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
         </thead>
         <tbody>
           
-          {versionHistory(history).length === 0 ? <h1>No history</h1> : versionHistory(history).map((data, i) => {
+          {versionHistory(history).length === 0 ? <h6>No history</h6> : versionHistory(history).map((data, i) => {
             return (
               
               <tr key={i}>
