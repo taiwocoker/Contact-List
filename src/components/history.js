@@ -12,7 +12,7 @@ const History = ({match, getHistory, histor: {history, loading}}) => {
   
   useEffect(() => {
   getHistory(id);
-  }, [id,getHistory]);
+  }, [id]);
 
   const version = []
   const versionHistory = (history = []) => {
