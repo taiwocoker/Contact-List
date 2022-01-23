@@ -3,11 +3,11 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import { toast } from 'react-toastify';
 
-
+const baseUrl = "https://contacts-apitest.herokuapp.com/api/v1/contacts"
 
   export const setContacts = () => async(dispatch) => {
     try{
-      const res = await axios.get('https://contacts-apitest.herokuapp.com/api/v1/contacts');
+      const res = await axios.get(baseUrl);
   
       dispatch({
         type: types.SET_CONTACTS,
@@ -21,7 +21,7 @@ import { toast } from 'react-toastify';
 
   export const getContact = (id) => async(dispatch) => {
     try{
-      const res = await axios.get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`);
+      const res = await axios.get(`${baseUrl}/${id}`);
       dispatch({
         type: types.GET_CONTACT,
         payload: res.data
@@ -40,7 +40,7 @@ import { toast } from 'react-toastify';
         }
       }
   
-      const res = await axios.post('https://contacts-apitest.herokuapp.com/api/v1/contacts', formData, config);
+      const res = await axios.post(baseUrl, formData, config);
   
       dispatch({
         type: types.ADD_CONTACT,
@@ -56,7 +56,7 @@ import { toast } from 'react-toastify';
 
   export const deleteContact = (id) => async(dispatch) => {
     try{
-      await axios.delete(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`);
+      await axios.delete(`${baseUrl}/${id}`);
       prompt('Do you want to delete this contact?')
       dispatch({
         type: types.DELETE_CONTACT,
@@ -76,7 +76,7 @@ import { toast } from 'react-toastify';
           'Content-Type': 'application/json'
         }
       }
-      const res = await axios.put(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}`,formData, config);
+      const res = await axios.put(`${baseUrl}/${id}`,formData, config);
       dispatch({
         type: types.UPDATE_CONTACT,
         payload: { id, contact: res.data}
@@ -90,7 +90,7 @@ import { toast } from 'react-toastify';
   
   export const getHistory = (id) => async(dispatch) => {
     try{
-      const res = await axios.get(`https://contacts-apitest.herokuapp.com/api/v1/contacts/${id}/versions`);
+      const res = await axios.get(`${baseUrl}/${id}/versions`);
   
       dispatch({
         type: types.GET_HISTORY,
