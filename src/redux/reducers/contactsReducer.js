@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  loading: false,
+  loading: true,
   contacts: [],
   history: [],
   contact: {},

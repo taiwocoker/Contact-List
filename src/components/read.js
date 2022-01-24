@@ -2,7 +2,6 @@ import React, { useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { setContacts, deleteContact} from '../redux/actions/contactsAction';
 import { connect } from 'react-redux';
-import Spinner from './layout/Spinner';
 
 
 const Read = ({setContacts, deleteContact, contact: { contacts, loading }}) => {
@@ -17,7 +16,7 @@ const Read = ({setContacts, deleteContact, contact: { contacts, loading }}) => {
 
   
 
-  return loading ? <Spinner/> : (
+  return loading ? <h4>Loading...</h4>  : (
     <>
     <div className='container table-responsive-sm'>
 
